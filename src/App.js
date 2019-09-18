@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { createContext, useContext, useState } from 'react';
 import './App.css';
 
+const MessageContext = createContext();
+
 function App() {
+  const [ message, setMessage ] = useState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MessageContext.Provider value={{ message, setMessage }}>
+      <div className="App">
+        <Header></Header>
+        <Footer></Footer>
+      </div>
+    </MessageContext.Provider>
   );
+}
+
+function Header() {
+  console.debug("<Header> rendering");
+
+  const { message } = useContext(MessageContext);
+
+  return (
+    <p>Header: { message }</p>
+  );
+}
+
+function Footer() {
+  console.debug("<Footer> rendering");
+
+  const { setMessage } = useContext(MessageContext);
+  setMessage('foo');
+
+  return (<p>Footer</p>);
 }
 
 export default App;
