@@ -4,20 +4,25 @@ import { Salutations } from './components/Salutations';
 import { GreetingProvider } from './context/GreetingContext';
 import { SalutationsProvider } from './context/SalutationsContext';
 
-export const App = () => {
+/**
+ * XXX :: GjB :: HERE BE DRAGONS
+ */
+export const App = (props) => {
   return (
     <SalutationsProvider salutations={[ 'default salutations' ]}>
       <GreetingProvider greeting="default greeting">
         <div className="container">
           <h1>This is the &lt;app&gt; component, bitch!</h1>
+          <hr/>
           <div className="row">
-            <div className="alert alert-success col-sm mx-1">
+            <div className="col-sm mx-1">
               <Greeting></Greeting>
             </div>
-            <div className="alert alert-warning col-sm mx-1">
+            <div className="col-sm mx-1">
               <Salutations></Salutations>
             </div>
           </div>
+          <hr/>
         </div>
       </GreetingProvider>
     </SalutationsProvider>

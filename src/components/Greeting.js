@@ -4,8 +4,18 @@ import { useSalutations } from '../hooks/salutations';
 
 const salutations = 'Salutations from the <Greetings> component!';
 
+/**
+ * A 'greeting' bootstrap alert component.
+ * Notice the use of the custom 'useSalutations' hook.
+ */
 export const Greeting = () => {
-  useSalutations(salutations);
   const { greeting } = React.useContext(GreetingContext);
-  return (<p>{ greeting }</p>);
+  useSalutations(salutations);
+
+  return (
+    <div className="alert alert-success">
+      <h4 class="alert-heading">Greeting component</h4>
+      <p>{ greeting }</p>
+    </div>
+  );
 }
