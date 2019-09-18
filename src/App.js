@@ -1,38 +1,55 @@
 import React, { createContext, useContext, useState } from 'react';
 import './App.css';
 
+const GreetingContext = createContext();
 const MessageContext = createContext();
 
 function App() {
+  const [ greeting, setGreeting ] = useState();
   const [ message, setMessage ] = useState();
+  const [ salutation, setSalutation ] = useState();
+  const [ title, setTitle ] = useState();
+
+  const greetingContext = {
+    greeting, setGreeting,
+    salutation, setSalutation
+  };
+
+  const messageContext = {
+    message, setMessage,
+    title, setTitle,
+  };
 
   return (
-    <MessageContext.Provider value={{ message, setMessage }}>
-      <div className="App">
-        <Header></Header>
-        <Footer></Footer>
-      </div>
+    <MessageContext.Provider value={ messageContext }>
+      <GreetingContext.Provider value={ greetingContext }>
+        <div className="App">
+          <Greeting></Greeting>
+          <Message></Message>
+        </div>
+      </GreetingContext.Provider>
     </MessageContext.Provider>
   );
 }
 
-function Header() {
-  console.debug("<Header> rendering");
+function Greeting() {
+  const { greeting, salutation } = useContext(GreetingContext);
+  const { setMessage, setTitle } = useContext(MessageContext);
 
-  const { message } = useContext(MessageContext);
+  setMessage('message');
+  setTitle('title');
 
-  return (
-    <p>Header: { message }</p>
-  );
+  return (<p>Greeting: { greeting } { salutation }</p>);
 }
 
-function Footer() {
-  console.debug("<Footer> rendering");
+function Message() {
+  const { setGreeting, setSalutation } = useContext(GreetingContext);
+  const { message, title } = useContext(MessageContext);
 
-  const { setMessage } = useContext(MessageContext);
-  setMessage('foo');
+  setGreeting('greeting');
+  setSalutation('salutation');
 
-  return (<p>Footer</p>);
+  return (<p>Message: { message } { title }</p>);
 }
 
 export default App;
