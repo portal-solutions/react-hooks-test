@@ -7,12 +7,12 @@ const MessageContext = createContext();
 function App() {
   const [ greeting, setGreeting ] = useState();
   const [ message, setMessage ] = useState();
-  const [ salutation, setSalutation ] = useState();
+  const [ salutations, setSalutations ] = useState();
   const [ title, setTitle ] = useState();
 
   const greetingContext = {
     greeting, setGreeting,
-    salutation, setSalutation
+    salutations, setSalutations
   };
 
   const messageContext = {
@@ -33,21 +33,21 @@ function App() {
 }
 
 function Greeting() {
-  const { greeting, salutation } = useContext(GreetingContext);
+  const { greeting, salutations } = useContext(GreetingContext);
   const { setMessage, setTitle } = useContext(MessageContext);
 
   setMessage('message');
   setTitle('title');
 
-  return (<p>Greeting: { greeting } { salutation }</p>);
+  return (<p>Greeting: { greeting } { salutations }</p>);
 }
 
 function Message() {
-  const { setGreeting, setSalutation } = useContext(GreetingContext);
+  const { setGreeting, setSalutations } = useContext(GreetingContext);
   const { message, title } = useContext(MessageContext);
 
   setGreeting('greeting');
-  setSalutation('salutation');
+  setSalutations([ 'salutation' ]);
 
   return (<p>Message: { message } { title }</p>);
 }
