@@ -14,7 +14,7 @@ export const Salutations = () => {
 
   return (
     <div className="alert alert-warning">
-      <h4 class="alert-heading">Greeting component</h4>
+      <h4 className="alert-heading">Greeting component</h4>
       <p>{ salutations }</p>
     </div>
   );
