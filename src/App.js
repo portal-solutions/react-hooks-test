@@ -1,55 +1,25 @@
-import React, { createContext, useContext, useState } from 'react';
-import './App.css';
+import React from 'react';
+import { Greeting } from './components/Greeting';
+import { Salutations } from './components/Salutations';
+import { GreetingProvider } from './context/GreetingContext';
+import { SalutationsProvider } from './context/SalutationsContext';
 
-const GreetingContext = createContext();
-const MessageContext = createContext();
-
-function App() {
-  const [ greeting, setGreeting ] = useState();
-  const [ message, setMessage ] = useState();
-  const [ salutations, setSalutations ] = useState();
-  const [ title, setTitle ] = useState();
-
-  const greetingContext = {
-    greeting, setGreeting,
-    salutations, setSalutations
-  };
-
-  const messageContext = {
-    message, setMessage,
-    title, setTitle,
-  };
-
+export const App = () => {
   return (
-    <MessageContext.Provider value={ messageContext }>
-      <GreetingContext.Provider value={ greetingContext }>
-        <div className="App">
-          <Greeting></Greeting>
-          <Message></Message>
+    <SalutationsProvider salutations={[ 'default salutations' ]}>
+      <GreetingProvider greeting="default greeting">
+        <div className="container">
+          <h1>This is the &lt;app&gt; component, bitch!</h1>
+          <div className="row">
+            <div className="alert alert-success col-sm mx-1">
+              <Greeting></Greeting>
+            </div>
+            <div className="alert alert-warning col-sm mx-1">
+              <Salutations></Salutations>
+            </div>
+          </div>
         </div>
-      </GreetingContext.Provider>
-    </MessageContext.Provider>
+      </GreetingProvider>
+    </SalutationsProvider>
   );
 }
-
-function Greeting() {
-  const { greeting, salutations } = useContext(GreetingContext);
-  const { setMessage, setTitle } = useContext(MessageContext);
-
-  setMessage('message');
-  setTitle('title');
-
-  return (<p>Greeting: { greeting } { salutations }</p>);
-}
-
-function Message() {
-  const { setGreeting, setSalutations } = useContext(GreetingContext);
-  const { message, title } = useContext(MessageContext);
-
-  setGreeting('greeting');
-  setSalutations([ 'salutation' ]);
-
-  return (<p>Message: { message } { title }</p>);
-}
-
-export default App;
