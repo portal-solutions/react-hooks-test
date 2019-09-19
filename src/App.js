@@ -12,7 +12,7 @@ export const App = (props) => {
   return (
     <SalutationsProvider salutations={[ 'default salutations' ]}>
       <GreetingProvider greeting="default greeting">
-        <div className="container bg-light">
+        <div className="container bg-light mt-2 rounded-lg">
           <h1>This is the &lt;app&gt; component, bitch!</h1>
           <hr/>
           <div className="row">
