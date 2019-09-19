@@ -23,8 +23,8 @@ export const App = (props) => {
               <Salutations></Salutations>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm mx-1">
+          <div className="row">
+            <div className="col-sm mx-1">
               <Footer></Footer>
             </div>
           </div>
