@@ -24,7 +24,7 @@ export const App = (props) => {
             </div>
           </div>
           <div class="row">
-            <div class="col-sm">
+            <div class="col-sm mx-1">
               <Footer></Footer>
             </div>
           </div>
